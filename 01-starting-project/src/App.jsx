@@ -1,13 +1,22 @@
+import { useState } from 'react';
 import {CORE_CONCEPTS} from './data.js'
 import Header from './components/Header.jsx';
 import CoreConcept from './components/CoreConcept.jsx';
 import TabButton from './components/TabButton.jsx';
+import { EXAMPLES } from './data.js';
 
 
 function App() {
-  function SelectHandler(){
-        console.log(`You clicked this button - selected`);
+  const [A,setA] = useState()
+
+  function SelectHandler(selectedButton){
+        setA(selectedButton)
+        console.log(A);
+        
     }
+    console.log('APP component executing');
+    
+
   return (
     <div>
       <Header />
@@ -28,11 +37,21 @@ function App() {
       </main>
       <section id='examples'>
       <menu>
-        <TabButton onSelect= {SelectHandler}>Components</TabButton>
-        <TabButton onSelect= {SelectHandler}>JSX</TabButton>
-        <TabButton onSelect= {SelectHandler}>Props</TabButton>
-        <TabButton onSelect= {SelectHandler}>State</TabButton>
+        <TabButton onSelect= {() => SelectHandler('components')} isSelected = {A === 'components'}>Components</TabButton>
+        <TabButton onSelect= {() => SelectHandler('jsx')} isSelected = {A === 'jsx'}>JSX</TabButton>
+        <TabButton onSelect= {() => SelectHandler('props')} isSelected = {A === 'props'}>Props</TabButton>
+        <TabButton onSelect= {() => SelectHandler('state')} isSelected = {A === 'state'}>State</TabButton>
       </menu>
+      {!A ? <p>Please select a topic</p> : null}
+      {A ? <div id='tab-content'>
+        <h3>{EXAMPLES[A].title}</h3>
+        <p>{EXAMPLES[A].description}</p>
+        <pre>
+          <code>
+            {EXAMPLES[A].code}
+          </code>
+        </pre>
+      </div> : null}
       </section>
     </div>
   );
