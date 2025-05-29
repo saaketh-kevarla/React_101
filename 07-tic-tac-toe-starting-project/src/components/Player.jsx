@@ -1,12 +1,10 @@
 import { useState } from "react"
 
-export default function Player({initialName,symbol}){
+export default function Player({initialName,symbol,isActive}){
     const [isEditing,setisEditing] = useState(false);
     const [isName,setisName] = useState(initialName)
 
     function handleEdit(){
-        if(isEditing){
-        }
         setisEditing(someEdit => !someEdit)
         //setisEditing(someEdit => !someEdit) this helps with working with the latest state
     }
@@ -22,7 +20,7 @@ export default function Player({initialName,symbol}){
     }
 
     return (
-        <li>
+        <li className= {isActive ? 'active': undefined}>
           <span className="player">
             {playername}
             <span className="player-symbol">{symbol}</span>
