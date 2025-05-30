@@ -1,6 +1,8 @@
 import Player from "./components/Player"
 import Gameboard from "./components/Gameboard"
+import Log from "./components/Log"
 import { useState } from "react"
+import { WINNING_COMBINATIONS } from "./winning-combinations"
 
 function App() {
 
@@ -36,7 +38,7 @@ function App() {
       GAMEBOARD
       <Gameboard onSelectSquare = {handleSelectsquare} turns={gameTurns}/>
       </div>
-      LOG
+      <Log turns = {gameTurns}/>
     </main>
     
   )
