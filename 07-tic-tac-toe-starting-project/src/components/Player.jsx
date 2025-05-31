@@ -1,31 +1,43 @@
-import { useState } from "react"
+import { useState } from 'react';
 
-export default function Player({initialName,symbol,isActive}){
-    const [isEditing,setisEditing] = useState(false);
-    const [isName,setisName] = useState(initialName)
+export default function Player({
+  initialName,
+  symbol,
+  isActive,
+  onChangeName,
+}) {
+  const [playerName, setPlayerName] = useState(initialName);
+  const [isEditing, setIsEditing] = useState(false);
 
-    function handleEdit(){
-        setisEditing(someEdit => !someEdit)
-        //setisEditing(someEdit => !someEdit) this helps with working with the latest state
+  function handleEditClick() {
+    setIsEditing((editing) => !editing);
+
+    if (isEditing) {
+      onChangeName(symbol, playerName);
     }
+  }
 
-    function handleName(event){
-        console.log(event);
-        setisName(event.target.value)
-    }
+  function handleChange(event) {
+    setPlayerName(event.target.value);
+  }
 
-    let playername = <span className="player-name">{isName}</span> 
-    if(isEditing){
-        playername = <span className="player-name"><input type="text" required value = {isName} onChange={handleName}/></span>
-    }
+  let editablePlayerName = <span className="player-name">{playerName}</span>;
+  // let btnCaption = 'Edit';
 
-    return (
-        <li className= {isActive ? 'active': undefined}>
-          <span className="player">
-            {playername}
-            <span className="player-symbol">{symbol}</span>
-          </span>
-          <button onClick = {handleEdit} >{isEditing?'SAVE':'EDIT'}</button>
-        </li>
-    )
+  if (isEditing) {
+    editablePlayerName = (
+      <input type="text" required value={playerName} onChange={handleChange} />
+    );
+    // btnCaption = 'Save';
+  }
+
+  return (
+    <li className={isActive ? 'active' : undefined}>
+      <span className="player">
+        {editablePlayerName}
+        <span className="player-symbol">{symbol}</span>
+      </span>
+      <button onClick={handleEditClick}>{isEditing ? 'Save' : 'Edit'}</button>
+    </li>
+  );
 }
