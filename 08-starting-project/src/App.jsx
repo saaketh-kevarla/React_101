@@ -44,6 +44,10 @@ function App() {
     }
     myArr = calculateInvestmentResults(obj1);
   }
+  let tableContent;
+  if(val){
+    tableContent = <Table valArr={myArr}/>
+  }
 
  
   return (
@@ -57,10 +61,7 @@ function App() {
       <InputGroup val1 = 'EXPECTED RETURN' val2 = 'DURATION' h1 ={handleInputC} h2 = {handleInputD}/>
     </div>
     {/* conditional rendering based on input values/states */}
-    {val ? 
-    <Table valArr={myArr}/> : 
-    ''
-    }
+    {tableContent}
     </>
   )
 }
