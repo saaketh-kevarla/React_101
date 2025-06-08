@@ -16,8 +16,8 @@ export default function Table({valArr}){
             </tr>
         </thead>
         <tbody>
-            {valArr.map(eachRow => (
-                <tr>
+            {valArr.map((eachRow,ind)=> (
+                <tr key={ind}>
                     <td>{(eachRow.year)}</td>
                     <td>{formatter.format(eachRow.valueEndOfYear)}</td>
                     <td>{formatter.format(eachRow.interest)}</td>
