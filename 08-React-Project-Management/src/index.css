@@ -1,3 +1,67 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* @import "tailwindcss"; */
+
+@import url('https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    font-family: "Andika", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#main-container{
+    margin-top: 35px;
+    height: 100vh;
+    width: 100vw;
+    background-color: peachpuff;
+    border : 5px solid orange;
+    display: flex;
+
+}
+
+#side-bar{
+    height : 100vh;
+    width : 35%;
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 15px;
+    color: white;
+    padding-left: 20px;
+
+}
+
+#side-bar h1{
+    font-size: 30px;
+    margin-top : 40px;
+    text-transform: uppercase;
+}
+
+#side-bar button {
+    border: 1px solid white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-top: 40px;
+    background-color: grey;
+}
+
+#project-container {
+    height:100vh;
+    width : 75%;
+    border:2px solid yellowgreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20vh;
+    gap: 10px;
+}
+
+#project-container img{
+    height : 12vh;
+    width : 7vw;
+}
+
+#project-container button {
+    border: 1px solid black;
+    padding : 10px 20px;
+    border-radius: 5px;
+}

@@ -1,7 +1,13 @@
+import Sidebar from "./components/Sidebar";
+import ProjectContainer from "./components/ProjectContainer";
+
 function App() {
   return (
     <>
-      <h1 className="my-8 text-center text-5xl font-bold">Hello World</h1>
+      <div id='main-container'>
+        <Sidebar />
+        <ProjectContainer/>
+      </div>
     </>
   );
 }
