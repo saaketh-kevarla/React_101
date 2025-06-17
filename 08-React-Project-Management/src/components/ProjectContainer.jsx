@@ -1,5 +1,6 @@
-import {useState} from "react"
+import {useRef, useState} from "react"
 import {styled} from 'styled-components'
+import MyProject from "./MyProject";
 
 const NewProject = styled.div`
 display : flex;
@@ -34,16 +35,43 @@ margin : 0px 15vw;
 
 `
 
-export default function ProjectContainer(){
+export default function ProjectContainer({projData,setProjData}){
+    const input1 = useRef(null);
+    const textarea1 = useRef(null);
+    const input2 = useRef(null);
+
+    const [noProject,setNoProject] = useState(true);
     const [createProject,setCreateProject] = useState(false);
+    const [projectPage,setProjectPage] = useState(false);
+    
+
 
     function handleClick(){
+      setNoProject(false);
       setCreateProject(true);
     }
 
+    function handleSave(event){
+      event.preventDefault(); 
+      setProjData((prevData) => {
+          const arr = [...prevData,
+            {Title : input1.current.value,
+            Description: textarea1.current.value,
+            Due : input2.current.value
+            }
+        ]
+
+          return arr;
+      })
+      setCreateProject(false);
+      setProjectPage(true);
+    }
+
+    
+
     return (
         <>
-          {!createProject && (
+          {noProject && (
             <div id='project-container'>
               <img src="logo.png" alt="paperboard image" />
               <h2>No Project selected</h2>
@@ -54,19 +82,28 @@ export default function ProjectContainer(){
           {createProject && (
             <>
               <NewProject>
-                <div id='button-div'>
-                  <button>cancel</button>
-                  <button>Save</button>
-                </div>
-                <div id="input-div">
-                  <label htmlFor="Title">TITLE</label>
-                  <input type="text" id="Title"/>
-                  <label htmlFor="Description">DESCRIPTION</label>
-                  <input type="text" id="Description"/>
-                  <label htmlFor="Due">DUE DATE</label>
-                  <input type="text" id="Due"/>
-                </div>
+                <form onSubmit={handleSave}>
+                  <div id='button-div'>
+                    <button>cancel</button>
+                    <button type="submit">Save</button>
+                  </div>
+                  <div id="input-div">
+                    <label htmlFor="Title" >TITLE</label>
+                    <input type="text" id="Title" ref={input1}/>
+                    <label htmlFor="Description">DESCRIPTION</label>
+                    <textarea type="text" id="Description" ref={textarea1}/>
+                    <label htmlFor="Due">DUE DATE</label>
+                    <input type="date" id="Due" ref={input2}/>
+                  </div>
+                </form>
               </NewProject>
+            </>
+          )}
+          {projectPage && (
+            <>
+            <MyProject projects = {projData}>
+            
+            </MyProject>
             </>
           )}
       </>   
