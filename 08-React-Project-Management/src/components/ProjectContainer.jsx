@@ -7,14 +7,23 @@ display : flex;
 flex-direction : column;
 padding-top : 80px;
 height : 100vh;
-width : 50vw;
+width : 45vw;
 border : 2px solid brown;
-margin : 0px 15vw;
+margin : 0px 5vw;
 
 & button{
   height : 40px;
   width : 80px;
-  margin-right : 10px
+  margin-right : 10px;
+  background-color : black;
+  color : white;
+  cursor : pointer;
+}
+
+& #cancel{
+  border : none;
+  background-color : white;
+  color : black;
 }
 
 & #button-div{
@@ -29,7 +38,11 @@ margin : 0px 15vw;
 }
 
 & input{
-  height : 5vh;
+  height : 7vh;
+}
+
+& textarea {
+  height : 15vh;
 }
 
 
@@ -84,7 +97,7 @@ export default function ProjectContainer({projData,setProjData}){
               <NewProject>
                 <form onSubmit={handleSave}>
                   <div id='button-div'>
-                    <button>cancel</button>
+                    <button id='cancel'>cancel</button>
                     <button type="submit">Save</button>
                   </div>
                   <div id="input-div">
@@ -102,7 +115,6 @@ export default function ProjectContainer({projData,setProjData}){
           {projectPage && (
             <>
             <MyProject projects = {projData}>
-            
             </MyProject>
             </>
           )}
