@@ -48,14 +48,12 @@ margin : 0px 5vw;
 
 `
 
-export default function ProjectContainer({projData,setProjData}){
+export default function ProjectContainer({projData,setProjData,createProject,setCreateProject,noProject,setNoProject,projectPage,setProjectPage,index,setIndex,tasksArray,setTasksArray}){
     const input1 = useRef(null);
     const textarea1 = useRef(null);
     const input2 = useRef(null);
 
-    const [noProject,setNoProject] = useState(true);
-    const [createProject,setCreateProject] = useState(false);
-    const [projectPage,setProjectPage] = useState(false);
+
     
 
 
@@ -77,6 +75,7 @@ export default function ProjectContainer({projData,setProjData}){
           return arr;
       })
       setCreateProject(false);
+      setIndex(-1);
       setProjectPage(true);
     }
 
@@ -114,7 +113,7 @@ export default function ProjectContainer({projData,setProjData}){
           )}
           {projectPage && (
             <>
-            <MyProject projects = {projData}>
+            <MyProject projects = {projData} index = {index} setIndex = {setIndex} tasksArray={tasksArray} setTasksArray={setTasksArray}>
             </MyProject>
             </>
           )}

@@ -8,17 +8,31 @@ color : yellow;
 & .item {
   background-color : grey;
   width : 200px;
+  cursor : pointer;
 }
 `
 
-export default function Sidebar({arr}){
+export default function Sidebar({arr,setCreateProject,setNoProject,setProjectPage,setIndex}){
 
   function handleNewProject(){
-
+    
+    setCreateProject(true);
+    setNoProject(false);
+    setProjectPage(false);
+    setIndex(-1);
+    
   }
 
-  function handleProject(){
-    
+  function handleProject(projTitle){
+    arr.map((projects,index) => {
+      if(projects.Title === projTitle ){
+        setIndex(index);
+      }
+
+    })
+    setProjectPage(true);
+    setNoProject(false);
+    setCreateProject(false);
   }
 
     return(

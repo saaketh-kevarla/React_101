@@ -66,9 +66,9 @@ margin-left : 20px;
 
 `
 
-export default function MyProject({projects}){
+export default function MyProject({projects,index,tasksArray,setTasksArray}){
     const ref = useRef(null);
-    const [tasksArray,setTasksArray] = useState([]);
+    //const [tasksArray,setTasksArray] = useState([]);
 
 
     
@@ -125,12 +125,18 @@ export default function MyProject({projects}){
         
     }
 
-    let a = projects.length - 1;
+    let a ;
+    if (index >= 0) {
+        a = index ;
+    }
+    else{
+        a = projects.length - 1;
+    }
 
 
     return(
         <ProjectDiv>
-            <h1>{projects[a].Title} <button id='delete' onClick={handleRemove}>Delete</button></h1>
+            <h1>{projects[a].Title} <button id='delete' onClick={() => handleRemove(projects[a].Title)}>Delete</button></h1>
             <h4>{projects[a].Due}</h4>
             <h2>{projects[a].Description}</h2>
             <hr />
