@@ -12,14 +12,23 @@ color : yellow;
 `
 
 export default function Sidebar({arr}){
+
+  function handleNewProject(){
+
+  }
+
+  function handleProject(){
+    
+  }
+
     return(
         <div id='side-bar'>
           <h1>Your Projects</h1>
-          <button>+ Add Project</button>
+          <button onClick={handleNewProject}>+ Add Project</button>
           <ProjectList>
             {
               arr.map((proj,index) => (
-                <div className='item' key={index}>{proj.Title}</div>
+                <div className='item' key={index} onClick={() => handleProject(proj.Title)}>{proj.Title}</div>
               ))
             }
           </ProjectList>

@@ -51,6 +51,17 @@ margin-left : 20px;
     margin-top : 30px;
     padding : 20px;
  }
+
+ & .div1 {
+    display : flex;
+    justify-content : space-between;
+ }
+
+ & .div1 button {
+    border : none;
+    background-color : #ededed;
+    cursor : pointer;
+ }
  
 
 `
@@ -59,9 +70,9 @@ export default function MyProject({projects}){
     const ref = useRef(null);
     const [tasksArray,setTasksArray] = useState([]);
 
+
+    
     function handleTask(myTitle) {
-
-
     const newTaskValue = ref.current.value;
 
     setTasksArray((prevTasks) => { // Always use the functional update form
@@ -92,11 +103,34 @@ export default function MyProject({projects}){
     ref.current.value = ''
 }
 
+    function handleDelete(myTitle,myTask){
+        let myObj = tasksArray.find((ele) => ele.Title === myTitle);
+        let newTasks = myObj.TaskName.filter((ele) => ele!== myTask);
+        console.log(newTasks);
+        setTasksArray((prevTasks) => (
+            prevTasks.map((project) => {
+                if(project.Title === myTitle){
+                    return {
+                        ...project,
+                        TaskName : newTasks,
+                    }
+                }
+                return project;
+            }) 
+        ))
+        
+    }
+
+    function handleRemove(){
+        
+    }
+
     let a = projects.length - 1;
-    let foundProject ; 
+
+
     return(
         <ProjectDiv>
-            <h1>{projects[a].Title} <button id='delete'>Delete</button></h1>
+            <h1>{projects[a].Title} <button id='delete' onClick={handleRemove}>Delete</button></h1>
             <h4>{projects[a].Due}</h4>
             <h2>{projects[a].Description}</h2>
             <hr />
@@ -108,11 +142,11 @@ export default function MyProject({projects}){
             <div className='show-tasks'>
                 {
                     (() => { // Start of the IIFE
-                        const targetProject = tasksArray.find((ele) => ele.Title === projects[a].Title); // Re-find here if not already outside
+                        let targetProject = tasksArray.find((ele) => ele.Title === projects[a].Title); // Re-find here if not already outside
 
                         if (targetProject && targetProject.TaskName) {
                         return targetProject.TaskName.map((e, index) => (
-                            <div key={index}>{e}</div>
+                            <div className='div1' key={index}>{e}<button onClick={() => handleDelete(projects[a].Title,e)}>clear</button></div>
                         ));
                         } else {
                         return null; // Or your placeholder message
